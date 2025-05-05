@@ -1,51 +1,58 @@
 import emailjs from '@emailjs/browser';
 
-const serviceID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-const templateID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
-if (publicKey) {
-    emailjs.init({
-        publicKey: publicKey,
-    });
-} else {
-    console.error("EmailJS Public Key is not defined. Make sure your .env file is set up correctly and accessible.");
+function initializeEmailJS() {
+    if (PUBLIC_KEY) {
+        emailjs.init({ publicKey: PUBLIC_KEY });
+    } else {
+        console.error("EmailJS Public Key is not defined. Ensure your .env file is correctly configured.");
+    }
 }
 
 function sendEmailWithParams(templateParams) {
-    if (!serviceID || !templateID) {
+    if (!SERVICE_ID || !TEMPLATE_ID) {
         console.error("EmailJS Service ID or Template ID is not defined.");
         return;
     }
 
-    emailjs.send(serviceID, templateID, templateParams)
-        .then((response) => {
-           console.log('Email sent successfully!', response.status, response.text);
-        }, (error) => {
-           console.log('Failed to send email...', error);
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(response => {
+            console.info('Email sent successfully!', response.status, response.text);
+        })
+        .catch(error => {
+            console.error('Failed to send email...', error);
         });
 }
+
 function sendEmailFromForm(formElement) {
-     if (!serviceID || !templateID) {
+    if (!SERVICE_ID || !TEMPLATE_ID) {
         console.error("EmailJS Service ID or Template ID is not defined.");
         return;
     }
 
-    emailjs.sendForm(serviceID, templateID, formElement)
-        .then((response) => {
-           console.log('Email sent successfully!', response.status, response.text);
-           formElement.reset();
-        }, (error) => {
-           console.log('Failed to send email...', error);
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formElement)
+        .then(response => {
+            console.info('Email sent successfully!', response.status, response.text);
+            formElement.reset();
+        })
+        .catch(error => {
+            console.error('Failed to send email...', error);
         });
 }
-const contactForm = document.getElementById('contactForm');
 
-if (contactForm) {
-    contactForm.addEventListener('submit', function(event) {
+const contactFormElement = document.getElementById('contactForm');
+
+if (contactFormElement) {
+    contactFormElement.addEventListener('submit', function(event) {
         event.preventDefault();
         sendEmailFromForm(this);
     });
 } else {
-    console.warn("Form with ID 'contactForm' not found. Email sending functionality may not work.");
+    console.warn("Form with ID 'contactForm' not found. Email sending functionality may be unavailable.");
 }
+
+initializeEmailJS();
+
