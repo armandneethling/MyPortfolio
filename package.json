@@ -2,7 +2,9 @@
   "name": "myportfolio",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
+    "build": "postcss ./src/css/tailwind.css -o ./public/build/tailwind.css",
     "dev": "postcss ./src/css/tailwind.css -o ./public/build/tailwind.css --watch"
   },
   "keywords": [],
