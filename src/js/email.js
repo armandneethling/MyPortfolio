@@ -41,7 +41,6 @@ function sendEmailFromForm(formElement) {
 }
 const contactForm = document.getElementById('contact-form');
 
-// Add an event listener for form submission
 if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
         event.preventDefault();
