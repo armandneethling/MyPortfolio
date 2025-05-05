@@ -39,7 +39,7 @@ function sendEmailFromForm(formElement) {
            console.log('Failed to send email...', error);
         });
 }
-const contactForm = document.getElementById('contact-form');
+const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
@@ -47,5 +47,5 @@ if (contactForm) {
         sendEmailFromForm(this);
     });
 } else {
-    console.warn("Form with ID 'contact-form' not found. Email sending functionality may not work.");
+    console.warn("Form with ID 'contactForm' not found. Email sending functionality may not work.");
 }
