@@ -30,3 +30,4 @@ Thumbs.db # Windows
 *.njsproj
 *.sln
 *.sw?
+.parcel-cache
