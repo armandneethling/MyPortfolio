@@ -2,20 +2,31 @@
 .env
 
 # Ignore Node.js dependencies
-node_modules/
+node_modules
 
 # Ignore build output directories
-dist/
-build/
-out/
+dist
+build
+out
 
 # Ignore logs
 *.log
-log/
+log
 
 # Ignore operating system files
 Thumbs.db # Windows
 
 # Ignore editor specific files
-.vscode/ # VS Code
-.idea/ # IntelliJ IDEA
+.vscode # VS Code
+.idea # IntelliJ IDEA
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
